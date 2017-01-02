@@ -114,8 +114,12 @@ int main(int argc, char *argv[])
 
     try {
 	    printf("Setting HDCP [%s]\n", enabled);
-	    device::VideoOutputPortType::getInstance(device::VideoOutputPortType::kHDMI).enabledHDCP(protectContent, hdcpKey, keySize);
-	    printf("Setting  HDCP done\n");
+		if( (NULL== hdcpKey) || (0==keySize) ){
+			printf("Invalid parameters, ignoring request: 0x%x, %d\n", hdcpKey, keySize);
+		}else{
+			device::VideoOutputPortType::getInstance(device::VideoOutputPortType::kHDMI).enabledHDCP(protectContent, hdcpKey, keySize);
+			printf("Setting  HDCP done\n");
+		}
     }
     catch (...) {
 	    printf("Exception Caught during [%s]\r\n", argv[0]);
