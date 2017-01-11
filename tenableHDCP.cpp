@@ -83,6 +83,10 @@ int main(int argc, char *argv[])
 			{
 				 keySize = param->bufLen;
 				 hdcpKey = param->buffer;
+
+				 if(0 == keySize){
+					break;
+				 }
 				
 				if ((hdcpKey[0] == 0) &&
 					(hdcpKey[1] == 0) &&
@@ -114,8 +118,8 @@ int main(int argc, char *argv[])
 
     try {
 	    printf("Setting HDCP [%s]\n", enabled);
-		if( (NULL== hdcpKey) || (0==keySize) ){
-			printf("Invalid parameters, ignoring request: 0x%x, %d\n", hdcpKey, keySize);
+		if(0 == keySize){
+			printf("Ignoring request, invalid parameters \n");
 		}else{
 			device::VideoOutputPortType::getInstance(device::VideoOutputPortType::kHDMI).enabledHDCP(protectContent, hdcpKey, keySize);
 			printf("Setting  HDCP done\n");
