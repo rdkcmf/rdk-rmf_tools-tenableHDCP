@@ -17,7 +17,7 @@
 # limitations under the License.
 ##########################################################################
 [Unit]
-Description=IARM Mgr Daemon DS MGR
+Description=HDCP Service
 After=dsmgr.service iarmbusd.service pwrmgr.service
 
 [Service]
